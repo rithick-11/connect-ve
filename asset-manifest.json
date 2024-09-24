@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/connect-ve/static/css/main.3197302b.css",
+    "main.js": "/connect-ve/static/js/main.a32992a4.js",
+    "index.html": "/connect-ve/index.html",
+    "main.3197302b.css.map": "/connect-ve/static/css/main.3197302b.css.map",
+    "main.a32992a4.js.map": "/connect-ve/static/js/main.a32992a4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3197302b.css",
+    "static/js/main.a32992a4.js"
+  ]
+}
