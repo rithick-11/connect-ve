@@ -1,27 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { LogoDark } from "../../Images/Logo/logos";
 
 const Home = () => {
   return (
-    <>
-      <div class="absolute top-0 -z-10 h-full w-full bg-white">
-        <div class="absolute bottom-auto left-auto right-0 top-0 h-[500px] w-[500px] -translate-x-[30%] translate-y-[20%] rounded-full bg-[rgba(173,109,244,0.5)] opacity-50 blur-[80px]"></div>
-      </div>
-      <div className="h-screen flex flex-col items-center justify-center">
-        <h1>Connect ve</h1>
-        <p>Grow your connect with us</p>
-        <div>
-          <div>
-            <div className="bg-slate-300">
-              <label>connect-ve/</label>
-              <input className="bg-transparent px-1" placeholder="rithick" />
-            </div>
-
+    <section className="home-page bg-[#ff4c1b] h-screen">
+      <div className="md:grid grid-cols-5 gap-4 h-full ">
+        <div className=" py-5 col-span-3 my-auto flex justify-center items-center flex-col ">
+          <img src={LogoDark} alt="logo" className="h-[220px] md:h-[330px] md:mt-0 md:self-center  self-start mt-16" />
+          <h1 className="text-yellow-50 ">One Link, All Profiles – Your Online World in One Place!</h1>
+          <p className="hidden md:block w-[60%] mt-5 text-center text-yellow-50">managing multiple social media profiles can be overwhelming. With just one link, you can now connect your entire online presence in a seamless</p>
+        </div>
+        <div className="col-span-2 md:my-auto px-5 mt-16 md:block flex flex-col items-end">
+          <p className=" text-yellow-50 mb-4">Chech availabity....</p>
+          <div className="bg-white w-fit px-3 py-2 rounded-sm">
+            <label>connect.ve/</label>
+            <input type="text" className="outline-none px-1" />
           </div>
-           <Link to={`/register`}>Get Started</Link>
+          <button className="bg-black text-white px-3 py-1 rounded-md mt-2 outline-none hover:bg-gray-800">Check</button>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 
