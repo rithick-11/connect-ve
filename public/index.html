@@ -4,10 +4,31 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="icon" href="https://cdn.sologo.ai/temp24h/logo/cc3878c2-a3d1-42fe-946f-3f0a6a530cc4.jpeg" />
+    <link
+      rel="icon"
+      href="https://cdn.sologo.ai/temp24h/logo/cc3878c2-a3d1-42fe-946f-3f0a6a530cc4.jpeg"
+    />
     <title>Connect ve</title>
   </head>
   <body>
     <div id="root"></div>
+    <script type="text/javascript">
+      (function (l) {
+        if (l.search[1] === "/") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .map(function (s) {
+              return s.replace(/~and~/g, "&");
+            })
+            .join("?");
+          window.history.replaceState(
+            null,
+            null,
+            l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      })(window.location);
+    </script>
   </body>
 </html>
