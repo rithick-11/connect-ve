@@ -9,7 +9,7 @@ const loginFrom = {
 }
 
 const Register = () => {
-  const [register, setRegister] = useSearchParams();
+  const [register] = useSearchParams();
   const [loginFormData, setLoginForm] = useState(loginFrom)
 
   const username = register.get("username");

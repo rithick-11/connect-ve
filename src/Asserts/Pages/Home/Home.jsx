@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { HashLoader, SyncLoader } from "react-spinners";
+import { HashLoader} from "react-spinners";
 import { LogoDark } from "../../Images/Logo/logos";
 import { useNavigate } from "react-router-dom";
 
