@@ -1,29 +1,45 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Navigate, useSearchParams } from "react-router-dom";
+import Cookies from "js-cookie";
 
 import { LogoDark } from "../../Images/Logo/logos";
 
+import { domainUrl } from "../../ServerData/apis";
+
 const loginFrom = {
-  email:"",
-  password:""
-}
+  email: "",
+  password: "",
+};
 
 const Register = () => {
   const [register] = useSearchParams();
-  const [loginFormData, setLoginForm] = useState(loginFrom)
+  const [loginFormData, setLoginForm] = useState(loginFrom);
 
   const username = register.get("username");
+
+  if (username === null) {
+    return <Navigate to="/" />;
+  }
 
   const handelLoginForm = (e) => {
     const name = e.target.name;
     const value = e.target.value;
-    setLoginForm(pre => ({...pre, [name]: value}))
-  }
+    setLoginForm((pre) => ({ ...pre, [name]: value }));
+  };
 
   const toLogin = async (e) => {
-    e.preventDefault()
-    console.log(loginFormData)
-  }
+    e.preventDefault();
+    const method = {
+      method: "post",
+      body: JSON.stringify({ ...loginFormData, username }),
+      headers: {
+        "Content-type": "application/json",
+      },
+    };
+    const loginApiCall = await fetch(`${domainUrl}/register/add-user`, method);
+    const { token } = await loginApiCall.json();
+    Cookies.set("authtoken", token, { expires: 2 })
+  };
 
   return (
     <section className="h-screen bg-[#ff4c1b] px-4 sm:px-8 md:px-28 py-3">
@@ -34,7 +50,10 @@ const Register = () => {
             Hey @{username} 👋
           </h1>
         </div>
-        <form className="mt-5 md:w-1/2 flex flex-col justify-center items-start gap-3 " onSubmit={toLogin}>
+        <form
+          className="mt-5 md:w-1/2 flex flex-col justify-center items-start gap-3 "
+          onSubmit={toLogin}
+        >
           <h1 className="text-white md:text-xl">Create an accout</h1>
           <div className="flex w-full px-2 py-1 md:w-[270px] rounded-md shadow-sm gap-2 bg-white text-black">
             <label className="text-sm self-baseline">email</label>
@@ -59,7 +78,10 @@ const Register = () => {
               required
             />
           </div>
-          <button type="submit" className="bg-black text-white px-3 py-1 rounded-md outline-none hover:bg-gray-800 flex items-center justify-center gap-3">
+          <button
+            type="submit"
+            className="bg-black text-white px-3 py-1 rounded-md outline-none hover:bg-gray-800 flex items-center justify-center gap-3"
+          >
             Connect
           </button>
         </form>

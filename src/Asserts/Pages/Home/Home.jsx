@@ -15,7 +15,6 @@ const Home = () => {
   const chechUserAvailabity = async () => {
     if(username === ""){
       setResopanse({msg:"enter username"})
-      console.log("working ")
       return
     }
     setCheckLoader(true);
@@ -43,16 +42,16 @@ const Home = () => {
   return (
     <section className="home-page bg-[#ff4c1b] h-screen">
       <div className="md:grid grid-cols-5 gap-4 h-full ">
-        <div className=" py-5 col-span-3 my-auto flex justify-center items-center flex-col gap-4 ">
+        <div className="px-3 py-5 col-span-3 my-auto flex justify-center items-center flex-col gap-4 ">
           <img
             src={LogoDark}
             alt="logo"
-            className="h-[220px] md:h-[270px] md:mt-0 md:self-center  self-start mt-16"
+            className="h-[150px] md:h-[270px] md:mt-0 md:self-center  self-start mt-16"
           />
           <h1 className="text-yellow-50 ">
-            One Link, All Profiles – Your Online World in One Place!
+            One Link, All Profiles - Your Online World in One Place!
           </h1>
-          <p className="hidden md:block w-[60%] mt-5 text-center text-yellow-50">
+          <p className="hidden text-sm font-light md:block w-[60%] mt-5 text-center text-yellow-50">
             managing multiple social media profiles can be overwhelming. With
             just one link, you can now connect your entire online presence in a
             seamless
