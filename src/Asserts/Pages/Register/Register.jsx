@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useSearchParams } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { LogoDark } from "../../Images/Logo/logos";
@@ -16,6 +16,7 @@ const Register = () => {
   const [loginFormData, setLoginForm] = useState(loginFrom);
 
   const username = register.get("username");
+  const navigate = useNavigate()
 
   if (username === null) {
     return <Navigate to="/" />;
@@ -39,6 +40,7 @@ const Register = () => {
     const loginApiCall = await fetch(`${domainUrl}/register/add-user`, method);
     const { token } = await loginApiCall.json();
     Cookies.set("authtoken", token, { expires: 2 })
+    navigate(`/${username}`)
   };
 
   return (
