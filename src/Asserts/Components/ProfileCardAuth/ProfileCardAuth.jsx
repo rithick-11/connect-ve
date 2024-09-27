@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { InfoCard, InputCardV1 } from "../somponents";
+import Cookies from "js-cookie"
 
+import { InfoCard, InputCardV1 } from "../somponents";
 import { domainUrl } from "../../ServerData/apis";
+import { useNavigate } from "react-router-dom";
 
 const ProfileCardAuth = ({ data }) => {
+
+  const navigate = useNavigate()
+
   const [editProfile, setEditProfile] = useState({
     state: false,
     loader: false,
@@ -14,7 +19,8 @@ const ProfileCardAuth = ({ data }) => {
     profession: data.profession,
   });
 
-  const { avatorUrl, username, email, _id } = data;
+
+  const { avatorUrl, username, email} = data;
   const { name, bio, profession } = profileData;
 
   const handelProfileData = (e) => {
@@ -26,17 +32,22 @@ const ProfileCardAuth = ({ data }) => {
   const saveProfileData = async () => {
     setEditProfile((pre) => ({ ...pre, loader: true }));
     const method = {
-      method: "PUT",
-      body: JSON.stringify({ ...profileData }),
+      method: "put",
+      body: JSON.stringify({ ...profileData, username }),
       headers: {
         "Content-type": "application/json",
+        Authoriaztion: `Bearer ${Cookies.get("authtoken")}`,
       },
     };
     const loginApiCall = await fetch(
-      `${domainUrl}/users//update-profilo/${_id}`,
+      `${domainUrl}/users/update-profilo`,
       method
     );
-    setEditProfile((pre) => ({state: false , loader: false }));
+    if(loginApiCall.status === 401){
+      Cookies.remove("authtoken")
+      navigate(`/${username}/login`)
+    }
+    setEditProfile({state: false , loader: false });
   };
 
   return (

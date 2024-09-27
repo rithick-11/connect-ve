@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { domainUrl } from "../../ServerData/apis";
-import { LoaderF, ProfileCardAuth } from "../../Components/somponents";
+import { LoaderF } from "../../Components/somponents";
 
 const constApiData = {
   initail: "initail",
@@ -42,13 +42,22 @@ const ConnectVe = () => {
   }, []);
 
   const renderConnectVePage = () => {
+    const {data} =  apiResponse
+    const {userinfo} = data
+    const {username, name,bio, profession, avatorUrl, email} = userinfo
 
-    return(
-        <section>
-            wecome to connect ve
-        </section>
-    )
-  }
+    return <section className="h-screen flex justify-center items-center ">
+      <div>
+        <img src={avatorUrl} alt={username} className="h-32 " />
+        <div>
+          <h1>{name}</h1>
+          <p>{bio}</p>
+          <h3>{profession}</h3>
+          <h1>{email}</h1>
+        </div>
+      </div>
+    </section>
+  };
 
   const renderViews = () => {
     const { status } = apiResponse;

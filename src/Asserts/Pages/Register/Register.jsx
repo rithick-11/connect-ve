@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { LogoDark } from "../../Images/Logo/logos";
@@ -15,12 +15,10 @@ const Register = () => {
   const [register] = useSearchParams();
   const [loginFormData, setLoginForm] = useState(loginFrom);
 
-  const username = register.get("username");
-  const navigate = useNavigate()
+  const [errMsg, setErrMsg] = useState("");
 
-  if (username === null) {
-    return <Navigate to="/" />;
-  }
+  const username = register.get("username");
+  const navigate = useNavigate();
 
   const handelLoginForm = (e) => {
     const name = e.target.name;
@@ -38,9 +36,13 @@ const Register = () => {
       },
     };
     const loginApiCall = await fetch(`${domainUrl}/register/add-user`, method);
-    const { token } = await loginApiCall.json();
-    Cookies.set("authtoken", token, { expires: 2 })
-    navigate(`/${username}/auth`)
+    const data = await loginApiCall.json();
+    if (loginApiCall.status === 202) {
+      Cookies.set("authtoken", data.token, { expires: 2 });
+      navigate(`/${username}/auth`);
+    } else if (loginApiCall.status === 400) {
+      setErrMsg(data.msg);
+    }
   };
 
   return (
@@ -86,6 +88,7 @@ const Register = () => {
           >
             Connect
           </button>
+          <p>{errMsg}</p>
         </form>
       </div>
     </section>

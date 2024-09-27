@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie";
 
 import { LogoDark } from "../../Images/Logo/logos";
@@ -10,7 +10,7 @@ const LoginAuth = () => {
   const { username } = useParams();
 
   const [loader, setLoader] = useState(true);
-
+  const [errMsg, setErrMsg] = useState("")
   const [loginFormData, setLoginForm] = useState({ username, password: "" });
 
   const navigate = useNavigate();
@@ -38,8 +38,8 @@ const LoginAuth = () => {
   useEffect(() => {
     cheackUser();
     if (Cookies.get("authtoken") !== undefined) {
-      navigate(`/${username}/auth`)
-      return
+      navigate(`/${username}/auth`);
+      return;
     }
   }, []);
 
@@ -47,15 +47,19 @@ const LoginAuth = () => {
     e.preventDefault();
     const method = {
       method: "post",
-      body: JSON.stringify({ ...loginFormData, username }),
+      body: JSON.stringify({ ...loginFormData }),
       headers: {
         "Content-type": "application/json",
       },
     };
-    const loginApiCall = await fetch(`${domainUrl}/register/add-user`, method);
-    const { token } = await loginApiCall.json();
-    Cookies.set("authtoken", token, { expires: 2 });
-    navigate(`/${username}/auth`);
+    const loginApiCall = await fetch(`${domainUrl}/users/login`, method);
+    const { token, msg } = await loginApiCall.json();
+    if (loginApiCall.status === 202) {
+      Cookies.set("authtoken", token, { expires: 2 });
+      navigate(`/${username}/auth`);
+    }else if (loginApiCall.status === 402){
+      setErrMsg(msg)
+    }
   };
 
   const renderView = () => {
@@ -106,6 +110,7 @@ const LoginAuth = () => {
             >
               Login
             </button>
+            <p>{errMsg}</p>
           </form>
         </div>
       </section>
