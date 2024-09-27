@@ -40,7 +40,7 @@ const Register = () => {
     const loginApiCall = await fetch(`${domainUrl}/register/add-user`, method);
     const { token } = await loginApiCall.json();
     Cookies.set("authtoken", token, { expires: 2 })
-    navigate(`/${username}`)
+    navigate(`/${username}/auth`)
   };
 
   return (
