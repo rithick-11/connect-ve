@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import Cookies from "js-cookie"
+import { useNavigate, useParams } from "react-router-dom";
 
 import { domainUrl } from "../../ServerData/apis";
 import { LoaderF, ProfileCardAuth } from "../../Components/somponents";
@@ -12,22 +11,14 @@ const constApiData = {
   fail: "fail",
 };
 
-const UserDetail = () => {
-
- 
-
-
+const ConnectVe = () => {
   const { username } = useParams();
   const [apiResponse, setApiResponse] = useState({
     status: constApiData.initail,
     data: {},
   });
 
- 
-
   const navigate = useNavigate();
-
-  
 
   const feedUserDAta = async () => {
     setApiResponse((pre) => ({ ...pre, status: constApiData.peding }));
@@ -47,32 +38,17 @@ const UserDetail = () => {
   };
 
   useEffect(() => {
-    if(Cookies.get("authtoken") === undefined){
-      navigate(`/${username}/login`)
-      return
-    }
     feedUserDAta();
   }, []);
 
+  const renderConnectVePage = () => {
 
-  
-
-  const renderUserPage = () => {
-    const { data } = apiResponse;
-    const { userinfo } = data;
-    const { username } = userinfo;
-
-    return (
-      <section className="h-screen bg-[#ff4c1b]">
-        <nav className="px-4 sm:px-8 md:px-28 py-2 bg-black text-white flex justify-between items-center">
-          <h1 className="text-lg">@{username}</h1>
-        </nav>
-        <div className="px-4 sm:px-8 md:px-28 py-2 mt-2 flex flex-col items-stretch">
-          <ProfileCardAuth data={userinfo} />
-        </div>
-      </section>
-    );
-  };
+    return(
+        <section>
+            wecome to connect ve
+        </section>
+    )
+  }
 
   const renderViews = () => {
     const { status } = apiResponse;
@@ -81,7 +57,7 @@ const UserDetail = () => {
         return <LoaderF />;
 
       case constApiData.success:
-        return renderUserPage();
+        return renderConnectVePage();
       default:
         return;
     }
@@ -90,4 +66,4 @@ const UserDetail = () => {
   return renderViews();
 };
 
-export default UserDetail;
+export default ConnectVe;
