@@ -65,9 +65,9 @@ const ProfileCardAuth = ({ data }) => {
             <img
               src={avatorUrl}
               alt={username}
-              className="h-24 rounded-full bg-white/25 px-1 border-[1px] border-white/40"
+              className="h-24 rounded-full bg-black/25 px-1 border-[1px] border-white/40"
             />
-            <h1 className="text-white font-light">@{username}</h1>
+            <h1 className=" font-light">@{username}</h1>
           </div>
         </div>
         <div className="flex flex-col gap-2">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie"
 
 import { domainUrl } from "../../ServerData/apis";
@@ -66,13 +66,13 @@ const UserDetail = () => {
     
 
     return (
-      <section className="min-h-screen bg-[#ff4c1b]">
-        <nav className="px-4 sm:px-8 md:px-28 py-2 bg-black text-white flex justify-between items-center">
-          <h1 className="text-lg">@{username}</h1>
+      <section className="min-h-screen bg-[#f9f9f9]">
+        <nav className="px-4 sm:px-8 md:px-28 py-3 bg-[#ff4c1b] text-white flex justify-between items-center">
+          <h1 className="text-xl">@{username}</h1>
         </nav>
         <div className="px-4 sm:px-8 md:px-28 py-2 mt-2 flex flex-col gap-2 items-stretch">
           <ProfileCardAuth data={userinfo} />
-          <SocailLinkAuth data={socialLink} />
+          <SocailLinkAuth data={socialLink} username={userinfo.username} />
         </div>
       </section>
     );

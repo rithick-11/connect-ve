@@ -42,21 +42,40 @@ const ConnectVe = () => {
   }, []);
 
   const renderConnectVePage = () => {
-    const {data} =  apiResponse
-    const {userinfo} = data
-    const {username, name,bio, profession, avatorUrl, email} = userinfo
+    const { data } = apiResponse;
+    const { userinfo } = data;
+    const { username, name, bio, profession, avatorUrl, email } = userinfo;
+    const { socialLink } = userinfo;
 
-    return <section className="h-screen flex justify-center items-center ">
-      <div>
-        <img src={avatorUrl} alt={username} className="h-32 " />
-        <div>
-          <h1>{name}</h1>
-          <p>{bio}</p>
-          <h3>{profession}</h3>
-          <h1>{email}</h1>
-        </div>
-      </div>
-    </section>
+    return (
+      <>
+        <div class="absolute top-0 z-[-2] min-h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+        <section className="h-screen flex justify-center items-center text-white">
+          <div className="">
+            <div className="flex items-center">
+              <div className="bg-white/30 rounded-lg px-2 pr-8 -mr-3">
+                <h1>{name}</h1>
+                <p>{bio}</p>
+              </div>
+              <img
+                src={avatorUrl}
+                alt={username}
+                className="h-32 bg-white rounded-full relative z-3"
+              />
+            </div>
+            {socialLink.length !== 0 && (
+              <ul className="flex justify-around px-2 py-1 rounded-lg mt-3 bg-white/30">
+                {socialLink.map((each) => (
+                  <a href={each.url} target="_blank" key={each.url} rel="noreferrer">
+                    <img src={each.logoUrl} alt={name} className="h-10" />
+                  </a>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      </>
+    );
   };
 
   const renderViews = () => {
