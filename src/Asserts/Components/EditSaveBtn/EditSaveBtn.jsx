@@ -4,7 +4,6 @@ import { MdOutlineDomainVerification } from "react-icons/md";
 import { ClockLoader } from "react-spinners";
 
 const EditSaveBtn = ({ editData, handelEdit, saveFunction }) => {
-  console.log(editData);
   return (
     <>
       {editData.state ? (

@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie"
 
 import { domainUrl } from "../../ServerData/apis";
-import { LoaderF, ProfileCardAuth } from "../../Components/somponents";
+import { LoaderF, ProfileCardAuth, SocailLinkAuth } from "../../Components/somponents";
 
 const constApiData = {
   initail: "initail",
@@ -60,15 +60,19 @@ const UserDetail = () => {
   const renderUserPage = () => {
     const { data } = apiResponse;
     const { userinfo } = data;
-    const { username } = userinfo;
+    const { username, socialLink } = userinfo;
+
+    console.log(socialLink);
+    
 
     return (
-      <section className="h-screen bg-[#ff4c1b]">
+      <section className="min-h-screen bg-[#ff4c1b]">
         <nav className="px-4 sm:px-8 md:px-28 py-2 bg-black text-white flex justify-between items-center">
           <h1 className="text-lg">@{username}</h1>
         </nav>
-        <div className="px-4 sm:px-8 md:px-28 py-2 mt-2 flex flex-col items-stretch">
+        <div className="px-4 sm:px-8 md:px-28 py-2 mt-2 flex flex-col gap-2 items-stretch">
           <ProfileCardAuth data={userinfo} />
+          <SocailLinkAuth data={socialLink} />
         </div>
       </section>
     );
