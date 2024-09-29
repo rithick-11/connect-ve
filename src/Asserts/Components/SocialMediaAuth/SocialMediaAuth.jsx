@@ -4,12 +4,14 @@ const SocialMediaAuth = (props) => {
     const {addLinkFun} = props
     const [selectedLink, setSelectedLink] = useState(props.selectedLink) 
 
-    const onAdd = () => {
+    const onSubmitFun = (event) => {
+      event.preventDeafult()
         addLinkFun({name: selectedLink.name, url:selectedLink.url + selectedLink.usename, visible: selectedLink.visible, logoUrl: selectedLink.logoUrl})
     }
 
+
   return (
-    <div className="px-3 py-2">
+    <form className="px-3 py-2" onSubmit={onSubmitFun}>
       <div className="flex items-center gap-2">
         <img
           src={selectedLink.logoUrl}
@@ -32,8 +34,8 @@ const SocialMediaAuth = (props) => {
         />
       </div>
       <p>{selectedLink.url + selectedLink.usename}</p>
-      <button onClick={onAdd}>Add </button>
-    </div>
+      <button type="submit" className="mt-3 bg-green-500 text-white px-2 py-[1px] rounded-md">Add </button>
+    </form>
   );
 };
 

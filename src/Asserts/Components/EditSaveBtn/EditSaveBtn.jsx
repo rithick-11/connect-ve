@@ -1,27 +1,25 @@
 import React from "react";
-import { FaPen } from "react-icons/fa";
 import { MdOutlineDomainVerification } from "react-icons/md";
+import { SiVerizon } from "react-icons/si";
+import { BsFillPenFill } from "react-icons/bs";
 import { ClockLoader } from "react-spinners";
 
 const EditSaveBtn = ({ editData, handelEdit, saveFunction }) => {
   return (
     <>
       {editData.state ? (
-        <button
-          className="bg-green-600/80 px-3 py-1 text-white/90 rounded-md flex items-center gap-2"
-          onClick={saveFunction}
-        >
-          <span className="font-light">Save</span>{" "}
-          <MdOutlineDomainVerification className="font-light" />{" "}
-          {editData.loader && <ClockLoader color="#fff" size={15} />}
+        <button onClick={saveFunction} className="flex items-center gap-2">
+          {editData.loader ? (
+            <ClockLoader color="#00000050" size={15} />
+          ) : (
+            <>
+              <span className="text-green-700">save</span> <SiVerizon className="font-bold text-green-500 h-[15px]" />
+            </>
+          )}
         </button>
       ) : (
-        <button
-          className="bg-blue-600/80 px-3 py-1 text-white/90 rounded-md flex items-center gap-2"
-          onClick={handelEdit}
-        >
-          <span className="font-light">Edit</span>{" "}
-          <FaPen className="font-light" />
+        <button className="" onClick={handelEdit}>
+          <BsFillPenFill className="h-[15px] text-blue-600" />
         </button>
       )}
     </>

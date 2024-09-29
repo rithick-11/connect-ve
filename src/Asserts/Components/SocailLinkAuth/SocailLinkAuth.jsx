@@ -56,7 +56,7 @@ const SocailLinkAuth = (props) => {
           {addLink ? "Cancel" : "Add Link"}
         </button>
         {addLink ? (
-          <div className="shadow-md border-[.5px] border-black mt-3 rounded-md">
+          <div className="shadow-sm border-[.5px] mt-3 rounded-md">
             {selectedLink.isSelected ? (
               <SocialMediaAuth
                 selectedLink={selectedLink}

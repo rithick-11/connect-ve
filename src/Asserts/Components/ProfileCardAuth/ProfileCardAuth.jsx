@@ -70,7 +70,7 @@ const ProfileCardAuth = ({ data }) => {
             <h1 className=" font-light">@{username}</h1>
           </div>
         </div>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-3">
           <InputCardV1
             name={"name"}
             value={name}
