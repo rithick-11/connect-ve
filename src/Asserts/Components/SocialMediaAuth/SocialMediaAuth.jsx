@@ -5,7 +5,7 @@ const SocialMediaAuth = (props) => {
     const [selectedLink, setSelectedLink] = useState(props.selectedLink) 
 
     const onSubmitFun = (event) => {
-      event.preventDeafult()
+      event.preventDefault()
         addLinkFun({name: selectedLink.name, url:selectedLink.url + selectedLink.usename, visible: selectedLink.visible, logoUrl: selectedLink.logoUrl})
     }
 

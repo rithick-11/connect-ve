@@ -18,7 +18,6 @@ const SocailLinkAuth = (props) => {
   const navigate = useNavigate();
 
   const saveSocialLink = () => {
-    console.log("save Socail Link");
     setEditSocialLinks((pre) => ({ ...pre, state: !pre.state }));
   };
 

@@ -39,7 +39,7 @@ const Register = () => {
     const data = await loginApiCall.json();
     if (loginApiCall.status === 202) {
       Cookies.set("authtoken", data.token, { expires: 2 });
-      navigate(`/${username}/auth`);
+      navigate(`/${username}/auth`, { replace: true });
     } else if (loginApiCall.status === 400) {
       setErrMsg(data.msg);
     }

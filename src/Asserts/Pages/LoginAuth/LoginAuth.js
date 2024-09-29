@@ -56,7 +56,7 @@ const LoginAuth = () => {
     const { token, msg } = await loginApiCall.json();
     if (loginApiCall.status === 202) {
       Cookies.set("authtoken", token, { expires: 2 });
-      navigate(`/${username}/auth`);
+      navigate(`/${username}/auth`, { replace: true });
     }else if (loginApiCall.status === 402){
       setErrMsg(msg)
     }
