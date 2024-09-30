@@ -58,6 +58,7 @@ const ProfileCardAuth = ({ data }) => {
         setEditProfile((pre) => ({ ...pre, state: !pre.state }));
       }}
       saveFunction={saveProfileData}
+      showEditBtn={true}
     >
       <div className="flex gap-3 flex-col">
         <div className="flex flex-col justify-center items-center text-center">

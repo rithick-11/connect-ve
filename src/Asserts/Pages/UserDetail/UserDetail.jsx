@@ -3,7 +3,7 @@ import {useNavigate, useParams } from "react-router-dom";
 import Cookies from "js-cookie"
 
 import { domainUrl } from "../../ServerData/apis";
-import { LoaderF, ProfileCardAuth, SocailLinkAuth } from "../../Components/somponents";
+import { LoaderF, ProfileCardAuth, SocialLinkCardAuth} from "../../Components/somponents";
 
 const constApiData = {
   initail: "initail",
@@ -72,7 +72,7 @@ const UserDetail = () => {
         </nav>
         <div className="px-4 sm:px-8 md:px-28 py-2 mt-2 flex flex-col gap-4 items-stretch">
           <ProfileCardAuth data={userinfo} />
-          <SocailLinkAuth data={socialLink} username={userinfo.username} />
+          <SocialLinkCardAuth data={userinfo}  />
         </div>
       </section>
     );

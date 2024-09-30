@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { HashLoader } from "react-spinners";
 import Cookies from "js-cookie";
 
 import { LogoDark } from "../../Images/Logo/logos";
@@ -10,7 +11,7 @@ const LoginAuth = () => {
   const { username } = useParams();
 
   const [loader, setLoader] = useState(true);
-  const [errMsg, setErrMsg] = useState("")
+  const [errMsg, setErrMsg] = useState({ errMsg: "", isLoading: false });
   const [loginFormData, setLoginForm] = useState({ username, password: "" });
 
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const LoginAuth = () => {
 
   const toLogin = async (e) => {
     e.preventDefault();
+    setErrMsg({ errMsg: "", isLoading: true });
     const method = {
       method: "post",
       body: JSON.stringify({ ...loginFormData }),
@@ -54,11 +56,13 @@ const LoginAuth = () => {
     };
     const loginApiCall = await fetch(`${domainUrl}/users/login`, method);
     const { token, msg } = await loginApiCall.json();
+
     if (loginApiCall.status === 202) {
       Cookies.set("authtoken", token, { expires: 2 });
+      setErrMsg({ errMsg: msg, isLoading: false });
       navigate(`/${username}/auth`, { replace: true });
-    }else if (loginApiCall.status === 402){
-      setErrMsg(msg)
+    } else if (loginApiCall.status === 402) {
+      setErrMsg({ errMsg: msg, isLoading: false });
     }
   };
 
@@ -104,13 +108,18 @@ const LoginAuth = () => {
                 required
               />
             </div>
-            <button
-              type="submit"
-              className="bg-black text-white px-3 py-1 rounded-md outline-none hover:bg-gray-800 flex items-center justify-center gap-3"
-            >
-              Login
-            </button>
-            <p>{errMsg}</p>
+            <div className="flex items-center w-full justify-between">
+              <button
+                type="submit"
+                className="bg-black text-white px-3 py-1 rounded-md outline-none hover:bg-gray-800 flex items-center justify-center gap-3"
+              >
+                <span>Login</span>
+                {errMsg.isLoading && (
+                  <HashLoader color="#fff" size={10} speedMultiplier={2} />
+                )}
+              </button>
+              <p>{errMsg.errMsg}</p>
+            </div>
           </form>
         </div>
       </section>

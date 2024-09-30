@@ -59,11 +59,11 @@ const Home = () => {
         </div>
         <div className="col-span-2 md:my-auto px-5 mt-16 md:block flex flex-col items-end">
           <p className=" text-yellow-50 mb-4">Chech availabity....</p>
-          <div className="bg-white w-fit px-3 py-2 rounded-sm">
+          <div className="bg-white w-fit px-3 flex  py-2 rounded-sm shadow">
             <label>connect.ve/</label>
             <input
               type="text"
-              className="outline-none px-1"
+              className="outline-none px-1 w-1/2"            
               onChange={(e) => {
                 setUsername(e.target.value.toLowerCase());
               }}
