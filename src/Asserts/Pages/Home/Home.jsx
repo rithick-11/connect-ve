@@ -31,7 +31,7 @@ const Home = () => {
     if(status){
       setCheckLoader(false)
       setResopanse({msg:"enjoy"})
-      navigate(`/register?username=${username}&signup=false`, { replace: true })
+      navigate(`/register?username=${username}&signup=false`)
     }else{
       setCheckLoader(false)
       setResopanse({msg:"try something new !!"})

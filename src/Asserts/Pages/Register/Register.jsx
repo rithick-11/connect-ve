@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { HashLoader} from "react-spinners";
 import Cookies from "js-cookie";
 
 import { LogoDark } from "../../Images/Logo/logos";
@@ -15,7 +16,10 @@ const Register = () => {
   const [register] = useSearchParams();
   const [loginFormData, setLoginForm] = useState(loginFrom);
 
-  const [errMsg, setErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState({errMsg: "", isLoading: false});
+
+  console.log(errMsg);
+  
 
   const username = register.get("username");
   const navigate = useNavigate();
@@ -35,13 +39,14 @@ const Register = () => {
         "Content-type": "application/json",
       },
     };
+    setErrMsg({errMsg: "", isLoading: true})
     const loginApiCall = await fetch(`${domainUrl}/register/add-user`, method);
     const data = await loginApiCall.json();
     if (loginApiCall.status === 202) {
       Cookies.set("authtoken", data.token, { expires: 2 });
       navigate(`/${username}/auth`, { replace: true });
     } else if (loginApiCall.status === 400) {
-      setErrMsg(data.msg);
+      setErrMsg({errMsg:data.msg, isLoading: false});
     }
   };
 
@@ -86,9 +91,9 @@ const Register = () => {
             type="submit"
             className="bg-black text-white px-3 py-1 rounded-md outline-none hover:bg-gray-800 flex items-center justify-center gap-3"
           >
-            Connect
+            Connect {errMsg.isLoading && <HashLoader color="#fff" size={10} speedMultiplier={2} />}
           </button>
-          <p>{errMsg}</p>
+          <p>{errMsg.errMsg}</p>
         </form>
       </div>
     </section>
